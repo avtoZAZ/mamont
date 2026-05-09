@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Команда NEFORMAMONT</title>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title data-i18n="meta.title">Команда NEFORMAMONT</title>
     <style>
         :root {
             --bg: #f6f7f9;
@@ -301,6 +302,51 @@
             transform: translateY(-1px);
         }
 
+
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .language-switcher {
+            display: inline-flex;
+            gap: 4px;
+            align-items: center;
+            padding: 4px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.68);
+        }
+
+        .language-button {
+            min-width: 42px;
+            min-height: 34px;
+            padding: 0 10px;
+            border: 0;
+            border-radius: calc(var(--radius) - 2px);
+            color: var(--muted);
+            background: transparent;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.84rem;
+            font-weight: 900;
+            transition: color 200ms ease, background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+        }
+
+        .language-button:hover {
+            color: var(--ink);
+            background: rgba(23, 25, 31, 0.06);
+            transform: translateY(-1px);
+        }
+
+        .language-button.is-active {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            box-shadow: 0 10px 24px rgba(209, 4, 4, 0.22);
+        }
+
         main {
             overflow: hidden;
         }
@@ -391,11 +437,76 @@
             box-shadow: 0 34px 100px rgba(0, 0, 0, 0.38);
         }
 
-        .video-frame iframe {
+        .video-frame iframe,
+        .video-preview {
             display: block;
             width: 100%;
             aspect-ratio: 16 / 9;
             border: 0;
+        }
+
+        .video-preview {
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            color: #ffffff;
+            background: #11141b;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .video-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.72;
+            transform: scale(1.02);
+            transition: opacity 240ms ease, transform 320ms ease;
+        }
+
+        .video-preview:hover img {
+            opacity: 0.5;
+            transform: scale(1.055);
+        }
+
+        .video-play {
+            position: absolute;
+            inset: 50% auto auto 50%;
+            display: inline-grid;
+            place-items: center;
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+            font-size: 1.45rem;
+            transform: translate(-50%, -50%);
+        }
+
+        .video-copy {
+            position: absolute;
+            right: 22px;
+            bottom: 20px;
+            left: 22px;
+            display: grid;
+            gap: 4px;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.62);
+        }
+
+        .video-copy strong,
+        .video-copy span {
+            display: block;
+        }
+
+        .video-copy strong {
+            font-size: 1.18rem;
+            line-height: 1.2;
+        }
+
+        .video-copy span {
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 0.92rem;
         }
 
         .team-grid {
@@ -568,6 +679,18 @@
                 width: 100%;
             }
 
+
+            .nav-actions {
+                align-items: flex-start;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .language-switcher {
+                width: 100%;
+                justify-content: center;
+            }
+
             .nav-links a {
                 padding: 8px 9px;
             }
@@ -660,35 +783,41 @@
     <header class="site-header" id="top">
         <div class="container hero">
             <div class="hero-copy reveal">
-                <p class="eyebrow">Креативная команда</p>
+                <p class="eyebrow" data-i18n="hero.eyebrow">Креативна команда</p>
                 <h1>NEFORMAMONT</h1>
-                <p class="hero-lead">Порушуємо шаблони, створюємо унікальний контент і збираємо навколо себе людей, яким тісно в рамках.</p>
+                <p class="hero-lead" data-i18n="hero.lead">Ламаємо шаблони, створюємо унікальний контент і збираємо навколо себе людей, яким тісно в рамках.</p>
                 <div class="hero-actions">
-                    <a class="button button-primary" href="#video">Посмотреть видео</a>
-                    <a class="button button-secondary" href="#team">Участники</a>
+                    <a class="button button-primary" href="#video" data-i18n="hero.videoButton">Подивитися відео</a>
+                    <a class="button button-secondary" href="#team" data-i18n="hero.teamButton">Учасники</a>
                 </div>
             </div>
 
             <div class="hero-media reveal">
-                <img src="Команда%20NEFORMAMONT_files/photo_2025-05-09_21-03-04.jpg" alt="Мамонт NEFORMAMONT">
-                <div class="hero-tags" aria-label="Направления команды">
-                    <span>Видео</span>
-                    <span>Музыка</span>
-                    <span>Стримы</span>
+                <img src="Команда%20NEFORMAMONT_files/photo_2025-05-09_21-03-04.jpg" alt="Мамонт NEFORMAMONT" data-i18n-attr="alt:hero.imageAlt">
+                <div class="hero-tags" aria-label="Напрями команди" data-i18n-attr="aria-label:hero.tagsLabel">
+                    <span data-i18n="hero.tagVideo">Відео</span>
+                    <span data-i18n="hero.tagMusic">Музика</span>
+                    <span data-i18n="hero.tagStreams">Стріми</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <nav aria-label="Основная навигация">
+    <nav aria-label="Основна навігація" data-i18n-attr="aria-label:nav.ariaLabel">
         <div class="container nav-inner">
             <a class="brand" href="#top">NEFORMAMONT</a>
-            <div class="nav-links">
-                <a href="#about">Про нас</a>
-                <a href="#video">Видео</a>
-                <a href="#team">Участники</a>
-                <a href="#gallery">Галерея</a>
-                <a href="#contacts">Контакты</a>
+            <div class="nav-actions">
+                <div class="nav-links">
+                    <a href="#about" data-i18n="nav.about">Про нас</a>
+                    <a href="#video" data-i18n="nav.video">Відео</a>
+                    <a href="#team" data-i18n="nav.team">Учасники</a>
+                    <a href="#gallery" data-i18n="nav.gallery">Галерея</a>
+                    <a href="#contacts" data-i18n="nav.contacts">Контакти</a>
+                </div>
+                <div class="language-switcher" aria-label="Перемикач мови" data-i18n-attr="aria-label:language.label">
+                    <button class="language-button is-active" type="button" data-lang="uk" aria-pressed="true">UA</button>
+                    <button class="language-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -697,12 +826,12 @@
         <section id="about">
             <div class="container about-grid">
                 <div class="section-intro reveal">
-                    <p class="section-label">Про нас</p>
-                    <h2>Команда, которая любит делать иначе</h2>
+                    <p class="section-label" data-i18n="about.label">Про нас</p>
+                    <h2 data-i18n="about.title">Команда, яка любить робити інакше</h2>
                 </div>
                 <div class="reveal">
-                    <p class="manifesto">NaVi - рождены, чтобы побеждать. Neformamont - <strong>вымерли</strong>, чтобы побеждать.</p>
-                    <p class="about-copy">NEFORMAMONT - це креативна команда, яка порушує шаблони та створює унікальний контент. Ми працюємо в жанрі відео, музики, стрімів та цифрового мистецтва. Наша місія - бути голосом покоління, якому тісно в рамках.</p>
+                    <p class="manifesto" data-i18n-html="about.manifesto">NaVi — народжені, щоб перемагати. Neformamont — <strong>вимерли</strong>, щоб перемагати.</p>
+                    <p class="about-copy" data-i18n="about.copy">NEFORMAMONT — це креативна команда, яка ламає шаблони та створює унікальний контент. Ми працюємо у жанрі відео, музики, стрімів і цифрового мистецтва. Наша місія — бути голосом покоління, якому тісно в рамках.</p>
                 </div>
             </div>
         </section>
@@ -710,18 +839,20 @@
         <section class="video-section" id="video">
             <div class="container video-layout">
                 <div class="section-intro reveal">
-                    <p class="section-label">Посмотрите видео</p>
-                    <h2>Главный визуальный блок сайта</h2>
-                    <p>Видео вынесено в отдельную заметную секцию: оно адаптивно, аккуратно встроено и выглядит как важная часть истории команды.</p>
+                    <p class="section-label" data-i18n="video.label">Дивіться відео</p>
+                    <h2 data-i18n="video.title">Головний візуальний блок сайту</h2>
+                    <p data-i18n="video.copy">Відео винесено в окрему помітну секцію: воно адаптивне, акуратно вбудоване та виглядає як важлива частина історії команди.</p>
                 </div>
                 <div class="video-frame reveal">
-                    <!-- Видео из ссылки: http://www.youtube.com/watch?v=69ISjRnSVEM&t -->
-                    <iframe
-                        src="https://www.youtube.com/embed/69ISjRnSVEM"
-                        title="Видео NEFORMAMONT"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
+                    <!-- When the page is opened locally, YouTube can block iframe playback. The preview opens YouTube locally and starts embedded playback on hosting. -->
+                    <a class="video-preview" href="https://www.youtube.com/watch?v=69ISjRnSVEM&t=0s" target="_blank" rel="noopener" data-video-id="69ISjRnSVEM" aria-label="Дивитися відео NEFORMAMONT" data-i18n-attr="aria-label:video.previewAria">
+                        <img src="https://i.ytimg.com/vi/69ISjRnSVEM/hqdefault.jpg" alt="Прев'ю відео NEFORMAMONT" data-i18n-attr="alt:video.previewAlt">
+                        <span class="video-play" aria-hidden="true">▶</span>
+                        <span class="video-copy">
+                            <strong data-i18n="video.previewTitle">Дивитися відео NEFORMAMONT</strong>
+                            <span data-i18n="video.previewHint">Натисніть, щоб запустити ролик</span>
+                        </span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -729,24 +860,24 @@
         <section id="team">
             <div class="container">
                 <div class="section-intro reveal">
-                    <p class="section-label">Команда</p>
-                    <h2>Участники команды</h2>
+                    <p class="section-label" data-i18n="team.label">Команда</p>
+                    <h2 data-i18n="team.title">Учасники команди</h2>
                 </div>
                 <ul class="team-grid">
                     <li class="team-card reveal">
                         <span class="member-name">NEFO</span>
-                        <h3>Идеолог и фронтмен</h3>
-                        <p>Отвечает за направление, энергию и общий голос команды.</p>
+                        <h3 data-i18n="team.nefoTitle">Ідеолог і фронтмен</h3>
+                        <p data-i18n="team.nefoCopy">Відповідає за напрям, енергію та загальний голос команди.</p>
                     </li>
                     <li class="team-card reveal">
                         <span class="member-name">FOMA</span>
-                        <h3>Саунд-дизайн и продакшн</h3>
-                        <p>Собирает звук, настроение и продакшн в цельный ритм.</p>
+                        <h3 data-i18n="team.fomaTitle">Саунд-дизайн і продакшн</h3>
+                        <p data-i18n="team.fomaCopy">Збирає звук, настрій і продакшн у цілісний ритм.</p>
                     </li>
                     <li class="team-card reveal">
                         <span class="member-name">MONT</span>
-                        <h3>Видео-редактор и монтаж</h3>
-                        <p>Держит визуальный темп, монтаж и финальную подачу.</p>
+                        <h3 data-i18n="team.montTitle">Відеоредактор і монтажер</h3>
+                        <p data-i18n="team.montCopy">Тримає візуальний темп, монтаж і фінальну подачу.</p>
                     </li>
                 </ul>
             </div>
@@ -755,12 +886,12 @@
         <section class="gallery-section" id="gallery">
             <div class="container gallery-layout">
                 <div class="section-intro reveal">
-                    <p class="section-label">Галерея</p>
-                    <h2>Визуальный образ NEFORMAMONT</h2>
-                    <p class="about-copy">Сохранил исходное изображение, но поместил его в чистый адаптивный блок с мягкой тенью и аккуратным hover-эффектом.</p>
+                    <p class="section-label" data-i18n="gallery.label">Галерея</p>
+                    <h2 data-i18n="gallery.title">Візуальний образ NEFORMAMONT</h2>
+                    <p class="about-copy" data-i18n="gallery.copy">Вихідне зображення збережено, але розміщено в чистому адаптивному блоці з м'якою тінню та акуратним hover-ефектом.</p>
                 </div>
                 <div class="gallery-image reveal">
-                    <img src="Команда%20NEFORMAMONT_files/photo_2025-05-09_21-03-04.jpg" alt="Фото команды NEFORMAMONT">
+                    <img src="Команда%20NEFORMAMONT_files/photo_2025-05-09_21-03-04.jpg" alt="Фото команди NEFORMAMONT" data-i18n-attr="alt:gallery.imageAlt">
                 </div>
             </div>
         </section>
@@ -769,13 +900,13 @@
             <div class="container">
                 <div class="support-panel reveal">
                     <div>
-                        <p class="section-label">Контакты</p>
-                        <h2>Поддержать команду</h2>
-                        <p>Ссылка поддержки сохранена, но теперь оформлена как часть общего интерфейса сайта.</p>
+                        <p class="section-label" data-i18n="contacts.label">Контакти</p>
+                        <h2 data-i18n="contacts.title">Підтримати команду</h2>
+                        <p data-i18n="contacts.copy">Посилання підтримки оформлено як частину загального інтерфейсу сайту.</p>
                     </div>
                     <div class="support-actions">
                         <a class="button button-primary" target="_blank" rel="noopener" href="https://buymeacoffee.com/zavodavtozr">Dota Plus</a>
-                        <a class="button button-light" href="#top">Наверх</a>
+                        <a class="button button-light" href="#top" data-i18n="contacts.backTop">Нагору</a>
                     </div>
                 </div>
             </div>
@@ -783,11 +914,175 @@
     </main>
 
     <footer>
-        <div class="container">© 2025 NEFORMAMONT. Усі права захищено.</div>
+        <div class="container" data-i18n="footer.copy">© 2025 NEFORMAMONT. Усі права захищено.</div>
     </footer>
 
     <script>
+        const translations = {
+            uk: {
+                "meta.title": "Команда NEFORMAMONT",
+                "hero.eyebrow": "Креативна команда",
+                "hero.lead": "Ламаємо шаблони, створюємо унікальний контент і збираємо навколо себе людей, яким тісно в рамках.",
+                "hero.videoButton": "Подивитися відео",
+                "hero.teamButton": "Учасники",
+                "hero.imageAlt": "Мамонт NEFORMAMONT",
+                "hero.tagsLabel": "Напрями команди",
+                "hero.tagVideo": "Відео",
+                "hero.tagMusic": "Музика",
+                "hero.tagStreams": "Стріми",
+                "nav.ariaLabel": "Основна навігація",
+                "nav.about": "Про нас",
+                "nav.video": "Відео",
+                "nav.team": "Учасники",
+                "nav.gallery": "Галерея",
+                "nav.contacts": "Контакти",
+                "language.label": "Перемикач мови",
+                "about.label": "Про нас",
+                "about.title": "Команда, яка любить робити інакше",
+                "about.manifesto": "NaVi — народжені, щоб перемагати. Neformamont — <strong>вимерли</strong>, щоб перемагати.",
+                "about.copy": "NEFORMAMONT — це креативна команда, яка ламає шаблони та створює унікальний контент. Ми працюємо у жанрі відео, музики, стрімів і цифрового мистецтва. Наша місія — бути голосом покоління, якому тісно в рамках.",
+                "video.label": "Дивіться відео",
+                "video.title": "Головний візуальний блок сайту",
+                "video.copy": "Відео винесено в окрему помітну секцію: воно адаптивне, акуратно вбудоване та виглядає як важлива частина історії команди.",
+                "video.previewAria": "Дивитися відео NEFORMAMONT",
+                "video.previewAlt": "Прев'ю відео NEFORMAMONT",
+                "video.previewTitle": "Дивитися відео NEFORMAMONT",
+                "video.previewHint": "Натисніть, щоб запустити ролик",
+                "team.label": "Команда",
+                "team.title": "Учасники команди",
+                "team.nefoTitle": "Ідеолог і фронтмен",
+                "team.nefoCopy": "Відповідає за напрям, енергію та загальний голос команди.",
+                "team.fomaTitle": "Саунд-дизайн і продакшн",
+                "team.fomaCopy": "Збирає звук, настрій і продакшн у цілісний ритм.",
+                "team.montTitle": "Відеоредактор і монтажер",
+                "team.montCopy": "Тримає візуальний темп, монтаж і фінальну подачу.",
+                "gallery.label": "Галерея",
+                "gallery.title": "Візуальний образ NEFORMAMONT",
+                "gallery.copy": "Вихідне зображення збережено, але розміщено в чистому адаптивному блоці з м'якою тінню та акуратним hover-ефектом.",
+                "gallery.imageAlt": "Фото команди NEFORMAMONT",
+                "contacts.label": "Контакти",
+                "contacts.title": "Підтримати команду",
+                "contacts.copy": "Посилання підтримки оформлено як частину загального інтерфейсу сайту.",
+                "contacts.backTop": "Нагору",
+                "footer.copy": "© 2025 NEFORMAMONT. Усі права захищено."
+            },
+            en: {
+                "meta.title": "NEFORMAMONT Team",
+                "hero.eyebrow": "Creative team",
+                "hero.lead": "We break templates, create unique content, and bring together people who feel boxed in by limits.",
+                "hero.videoButton": "Watch video",
+                "hero.teamButton": "Members",
+                "hero.imageAlt": "NEFORMAMONT mammoth",
+                "hero.tagsLabel": "Team directions",
+                "hero.tagVideo": "Video",
+                "hero.tagMusic": "Music",
+                "hero.tagStreams": "Streams",
+                "nav.ariaLabel": "Main navigation",
+                "nav.about": "About",
+                "nav.video": "Video",
+                "nav.team": "Members",
+                "nav.gallery": "Gallery",
+                "nav.contacts": "Contacts",
+                "language.label": "Language switcher",
+                "about.label": "About",
+                "about.title": "A team that loves doing things differently",
+                "about.manifesto": "NaVi were born to win. Neformamont went <strong>extinct</strong> to win.",
+                "about.copy": "NEFORMAMONT is a creative team that breaks templates and creates unique content. We work across video, music, streams, and digital art. Our mission is to be the voice of a generation that refuses to fit into frames.",
+                "video.label": "Watch the video",
+                "video.title": "The main visual block of the site",
+                "video.copy": "The video sits in a dedicated highlight section: it is responsive, neatly embedded, and feels like an important part of the team's story.",
+                "video.previewAria": "Watch the NEFORMAMONT video",
+                "video.previewAlt": "NEFORMAMONT video preview",
+                "video.previewTitle": "Watch the NEFORMAMONT video",
+                "video.previewHint": "Click to start the video",
+                "team.label": "Team",
+                "team.title": "Team members",
+                "team.nefoTitle": "Ideologist and frontman",
+                "team.nefoCopy": "Responsible for direction, energy, and the overall voice of the team.",
+                "team.fomaTitle": "Sound design and production",
+                "team.fomaCopy": "Turns sound, mood, and production into one solid rhythm.",
+                "team.montTitle": "Video editor and montage lead",
+                "team.montCopy": "Keeps the visual pace, editing, and final delivery on point.",
+                "gallery.label": "Gallery",
+                "gallery.title": "The visual identity of NEFORMAMONT",
+                "gallery.copy": "The original image is preserved, but placed in a clean responsive block with a soft shadow and a neat hover effect.",
+                "gallery.imageAlt": "Photo of the NEFORMAMONT team",
+                "contacts.label": "Contacts",
+                "contacts.title": "Support the team",
+                "contacts.copy": "The support link is styled as part of the site's main interface.",
+                "contacts.backTop": "Back to top",
+                "footer.copy": "© 2025 NEFORMAMONT. All rights reserved."
+            }
+        };
+
         const revealItems = document.querySelectorAll(".reveal");
+        const videoPreviews = document.querySelectorAll(".video-preview[data-video-id]");
+        const languageButtons = document.querySelectorAll(".language-button[data-lang]");
+
+        function setLanguage(language) {
+            const dictionary = translations[language] || translations.uk;
+
+            document.documentElement.lang = language;
+            document.querySelectorAll("[data-i18n]").forEach((element) => {
+                const key = element.dataset.i18n;
+                if (dictionary[key]) {
+                    element.textContent = dictionary[key];
+                }
+            });
+
+            document.querySelectorAll("[data-i18n-html]").forEach((element) => {
+                const key = element.dataset.i18nHtml;
+                if (dictionary[key]) {
+                    element.innerHTML = dictionary[key];
+                }
+            });
+
+            document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
+                element.dataset.i18nAttr.split(";").forEach((pair) => {
+                    const [attribute, key] = pair.split(":");
+                    if (attribute && key && dictionary[key]) {
+                        element.setAttribute(attribute.trim(), dictionary[key]);
+                    }
+                });
+            });
+
+            languageButtons.forEach((button) => {
+                const isActive = button.dataset.lang === language;
+                button.classList.toggle("is-active", isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
+
+            localStorage.setItem("neformamont-language", language);
+        }
+
+        languageButtons.forEach((button) => {
+            button.addEventListener("click", () => setLanguage(button.dataset.lang));
+        });
+
+        const savedLanguage = localStorage.getItem("neformamont-language");
+        setLanguage(savedLanguage === "en" ? "en" : "uk");
+
+        videoPreviews.forEach((preview) => {
+            preview.addEventListener("click", (event) => {
+                const isHostedPage = window.location.protocol === "http:" || window.location.protocol === "https:";
+
+                if (!isHostedPage) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const iframe = document.createElement("iframe");
+                const videoId = preview.dataset.videoId;
+                iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1`;
+                iframe.title = translations[document.documentElement.lang]?.["video.previewTitle"] || "NEFORMAMONT video";
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+                iframe.allowFullscreen = true;
+                iframe.referrerPolicy = "strict-origin-when-cross-origin";
+
+                preview.replaceWith(iframe);
+            });
+        });
 
         if ("IntersectionObserver" in window) {
             const revealObserver = new IntersectionObserver((entries, observer) => {
